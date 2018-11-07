@@ -1,11 +1,11 @@
 'use strict';
 
 const fs = require('fs');
-const axios = require('axios');
+const request = require('request-promise-native');
 const crypto = require('crypto')
 
 const filename = 'pageList.json'
-const axiosConfigFilename = 'axiosConfig.json'
+const requestConfigFilename = 'requestConfig.json'
 
 const STATUS_NO_CHANGE = "noChange";
 const STATUS_CHANGED = "changed";
@@ -20,9 +20,9 @@ const writeFile = (list) => {
   fs.writeFileSync(filename, JSON.stringify(list, null, '    '), 'utf-8');
 };
 
-const getAxiosConfig = () => {
-  if (fs.existsSync(axiosConfigFilename)) {
-    return JSON.parse(fs.readFileSync(axiosConfigFilename, 'utf-8'));
+const getRequestConfig = () => {
+  if (fs.existsSync(requestConfigFilename)) {
+    return JSON.parse(fs.readFileSync(requestConfigFilename, 'utf-8'));
   } else {
     return {};
   }
@@ -56,13 +56,13 @@ const pageListService = {
   },
   checkUpdate: function () {
     let requests = [];
-    let config = getAxiosConfig();
+    let config = getRequestConfig();
     console.log(config);
     this.getList().forEach(page => {
       requests.push(
-        axios.get(page.url, config)
-          .then(response => {
-            let hash = md5hex(response.data);
+        request.get(page.url, config)
+          .then(data => {
+            let hash = md5hex(data);
             if (hash === page.hash) {
               page.status = STATUS_NO_CHANGE;
             } else {
@@ -74,7 +74,7 @@ const pageListService = {
             return page;
           })
           .catch(error => {
-            page.error = error.message;
+            page.error = error;
             page.status = STATUS_ERROR;
             page.lastTime = Date.now();
             return page;

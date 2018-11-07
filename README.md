@@ -10,6 +10,6 @@ WebKohShin is a simple website monitoring tool.
 
 ## プロキシを使うには
 
-1. axiosConfig.json.sample を WebKohShin.exe と同じフォルダにコピーし、axiosConfig.json にリネーム
-2. axiosConfig.json を編集
+1. requestConfig.json.sample を WebKohShin.exe と同じフォルダにコピーし、requestConfig.json にリネーム
+2. requestConfig.json を編集
 3. 次のチェックから設定が有効になります
