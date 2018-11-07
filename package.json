@@ -15,7 +15,7 @@
     "electron-packager": "^12.2.0"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "https://github.com/axios/axios/archive/v0.19.0-beta.1.tar.gz",
     "glob": "^7.1.3"
   }
 }
