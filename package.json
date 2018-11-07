@@ -1,0 +1,21 @@
+{
+  "name": "WebKoShin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "npx electron .",
+    "build": "npx electron-packager . WebKohShin --platform=win32 --arch=x64 --overwrite --out=build --icon=src/icon.ico"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^3.0.4",
+    "electron-packager": "^12.2.0"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "glob": "^7.1.3"
+  }
+}

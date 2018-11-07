@@ -1,0 +1,22 @@
+{
+  "name": "electron-sample",
+  "description": "",
+  "main": "main.js",
+  "authors": [
+    "Naotaka Nakanishi <nakanishi-naotaka@osscat.net>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.7.5",
+    "bulma": "^0.7.2"
+  }
+}

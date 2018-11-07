@@ -1,0 +1,14 @@
+[
+    {
+        "url": "https://www.sei-info.co.jp/",
+        "status": "noChange",
+        "lastTime": 1541551491021,
+        "hash": "ac04bbf47a4f8d906fb8c590edb3f0c9"
+    },
+    {
+        "url": "https://www.google.com",
+        "status": "changed",
+        "lastTime": 1541551490886,
+        "hash": "108d948d8b272f34e4bfe26e5a69c4fb"
+    }
+]

@@ -1,0 +1,10 @@
+{
+  "proxy": {
+    "host": "www.proxy.com",
+    "port": 80,
+    "auth": {
+      "username": "taro",
+      "password": "hanako"
+    }
+  }
+}
