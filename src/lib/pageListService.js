@@ -70,10 +70,11 @@ const pageListService = {
               page.hash = hash;
             }
             page.lastTime = Date.now();
+            delete page.error;
             return page;
           })
           .catch(error => {
-            console.log(error);
+            page.error = error.message;
             page.status = STATUS_ERROR;
             page.lastTime = Date.now();
             return page;
