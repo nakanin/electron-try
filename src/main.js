@@ -1,7 +1,6 @@
 'use strict';
 
 const {app, BrowserWindow, Menu, Tray, Notification} = require('electron')
-const pageListService = require('./lib/pageListService');
 
 let mainWindow = null;
 let tray = null
@@ -20,21 +19,11 @@ app.on('ready', () => {
   setUpMainWindow();
 
   setUpTray();
-
-  setInterval(() => {
-    pageListService.checkUpdate()
-      .then(newList => {
-        mainWindow.webContents.send('list-updated', newList);
-        if (newList.some(page => page.status === pageListService.STATUS_CHANGED)) {
-          notify();
-        }
-      });
-  }, 60*60*1000);
 });
 
 const template = [
   {
-    label: 'webKohShin',
+    label: 'electron-try',
     submenu: [
       {
         label: 'Quit',
@@ -62,21 +51,11 @@ const menu = Menu.buildFromTemplate(template);
 
 const setUpMainWindow = () => {
   mainWindow = new BrowserWindow({
-    width: 800, 
-    height: 600,
-    icon: __dirname + '/icon.ico',
-    show: true,
-    minimizable: false,
-    skipTaskbar: true
+    width: 1400, 
+    height: 800,
+    show: true
   });
   mainWindow.loadURL('file://' + __dirname + '/index.html');
-  mainWindow.on('close', (event) => {
-    if (!mainWindow) {
-      return
-    }
-    mainWindow.hide();
-    event.preventDefault();
-  });
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
@@ -96,12 +75,3 @@ const setUpTray = () => {
   ])
   tray.setContextMenu(contextMenu)
 };
-
-const notify = () => {
-  let notification = new Notification({
-    title: '更新通知',
-    body: 'サイトが更新されました'
-  });
-  notification.show();
-};
-

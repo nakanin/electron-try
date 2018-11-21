@@ -2,39 +2,26 @@
 
 const electron = require('electron');
 const remote = electron.remote;
-const pageListService = remote.require('./lib/pageListService');
-const {ipcRenderer} = require('electron');
 
-const ngModule = angular.module('webKohShin', []);
+const ngModule = angular.module('electron-try', []);
 
 ngModule.controller('MainController', function ($scope) {
   const main = this;
 
-  main.pageList = pageListService.getList();
-  main.newUrl = null;
+  main.url = 'https://www.google.com';
 
-  main.addUrl = function () {
-    main.pageList = pageListService.addUrl(main.newUrl);
-  }
-  main.deleteUrl = function (url) {
-    main.pageList = pageListService.deleteUrl(url);
-  }
-  main.check = function () {
-    pageListService.checkUpdate()
-      .then(newList => {
-        $scope.$apply(() => {
-          main.pageList = newList;
-        });
-      });
-  }
   main.openUrl = (url) => {
-    const {shell} = require('electron');
-    shell.openExternal(url);
+    if (!url) {
+      return
+    }
+    let win = remote.getCurrentWindow();
+    let view = new remote.BrowserView({
+      webPreferences: {
+        nodeIntegration: false
+      }
+    })
+    win.setBrowserView(view)
+    view.setBounds({ x: 0, y: 200, width: 1400, height: 600 })
+    view.webContents.loadURL(url)
   }
-
-  ipcRenderer.on('list-updated', (event, newList) => {
-    $scope.$apply(() => {
-      main.pageList = newList;
-    });
-  })
 });
